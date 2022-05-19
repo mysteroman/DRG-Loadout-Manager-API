@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+         bootstrap="tests/init.php"
+         colors="true"
+         backupGlobals="false"
+         backupStaticAttributes="false"
+         processIsolation="false"
+         stopOnFailure="false"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true">
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+        <exclude/>
+        <report>
+            <clover outputFile="clover.xml"/>
+            <html outputDirectory="tests/coverage/result"/>
+        </report>
+    </coverage>
+    <testsuites>
+        <testsuite name="application">
+            <directory>tests/Models</directory>
+        </testsuite>
+    </testsuites>
+    <logging/>
+</phpunit>

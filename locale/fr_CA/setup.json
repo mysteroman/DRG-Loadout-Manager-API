@@ -1,0 +1,154 @@
+{
+  "setup": {
+    "application": {
+      "title": "Application",
+      "locale": {
+        "title": "Langue",
+        "description": "Entrer la langue à utiliser pour le format automatique ainsi que pour l'internationalisation par défaut par le framework. Doit être compatible avec le <a href='http://www.faqs.org/rfcs/rfc1766.html' target='_blank'>RFC 1766</a>. Débute normalement par le code de la langue sur 2 caractères suivi d'un « _ » et du code du pays également sur 2 caractères (exemple: fr_CA, en_US, en_CA)."
+      },
+      "charset": {
+        "title": "Jeu de caractères",
+        "description": "Entrer le jeu de caractères à utiliser par le framework Zephyrus. Ce paramètre est combiné avec la langue pour former le <i>locale</i> complet utilisé pour les formats automatiques et internationalisation (exemple: fr_CA.utf8 compatible avec la commande unix <code>locale -a</code>). Consultez la documentation de la fonction PHP <a href='https://www.php.net/manual/en/function.setlocale' target='_blank'>setlocale</a> pour plus d'information."
+      },
+      "currency": {
+        "title": "Devise",
+        "description": "Saisir la devise à utiliser pour le format automatique des montants d'argent par défaut par le framework. Doit être compatible avec la classe PHP <a href='https://www.php.net/manual/en/class.numberformatter.php' target='_blank'>NumberFormatter</a> (utilise normalement les codes de devise <a href='https://en.wikipedia.org/wiki/ISO_4217' target='_blank'>ISO 4217</a>). Selon le pays et la devise utilisée, les montants peuvent s'afficher différemment (exemple: 9 988 776,65 € en france, $999,999,999.99 au Canada anglais, 999 999 999,99 $ au Canada français). Se combine donc automatiquement avec la langue utilisée."
+      },
+      "timezone": {
+        "title": "Fuseau horaire",
+        "description": "Saisir le fuseau horaire à utiliser pour le format automatique des dates par le framework. Doit être compatible avec la <a href='https://www.php.net/manual/en/timezones.php' target='_blank'>liste de fuseau horaire supporté par PHP</a> (exemple: Eastern time: America/New_York, Central time: America/Chicago)."
+      }
+    },
+    "database": {
+      "title": "Base de données",
+      "dbms": {
+        "title": "SGBD",
+        "description": "Sélectionner le système de gestion de la base de données à utiliser pour votre projet. Les systèmes supportés actuellement par Zephyrus sont MySQL (MariaDB), PostgreSQL et SQLite. Il est possible de modifier cette configuration à tout moment depuis le fichier <code>config.ini</code>."
+      },
+      "host": {
+        "title": "Hôte",
+        "description": "Entrer le point d'accès vers la base de données du projet. Si la base de données s'exécute sur la même machine que le projet, entrez <code>localhost</code>, dans le cas d'une connexion distante saisissez son adresse IP ou nom de domaine accessible. Le port n'est pas nécessaire si celui par défaut est utilisé."
+      },
+      "name": {
+        "title": "Base de données",
+        "description": "Saisir le nom de la base de données à utiliser pour le projet. Dans le cas du SGBD SQLite, le nom de la base de données est le chemin relatif depuis la racine du projet vers le fichier de données, laissez vide pour charger une base de données SQLite en mémoire seulement."
+      },
+      "username": {
+        "title": "Nom d'utilisateur",
+        "description": "Au besoin, saisir un nom d'utilisateur pour l'authentification à la base de données. Par sécurité, vous devriez toujours créer un compte utilisateur spécifique pour le projet avec des accès restrains sur les fonctionnalités de la base de données (par exemple, limité uniquement aux requête <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code> et <code>DELETE</code>). Référez-vous à la documentation officielle de votre SGBD pour créer votre utilisateur avec des droits spécifiques."
+      },
+      "password": {
+        "title": "Mot de passe",
+        "description": "Au besoin, entrer le mot de passe pour l'authentification à la base de données. Ce mot de passe sera écrit en clair dans le fichier <code>config.ini</code>, assurez-vous donc d'avoir un mot de passe pour le développement et la production différent pour assurer une bonne sécurité. Optez également pour un mot de passe généré pour en augmenter sa complexitié."
+      },
+      "charset": {
+        "title": "Jeu de caractères",
+        "description": "Définir le jeu de caractères pour les transactions avec la base de données. Doit être un jeu de caractère valide par un DSN (Data Source Name) de la <a href='https://www.php.net/manual/en/pdo.construct.php' target='_blank'>bibliothèque PDO de PHP</a>. Pour assurer une cohérence au niveau des langues, il est recommandé d'utiliser le même jeu de caractères que pour l'application."
+      },
+      "shared": {
+        "title": "Instance partagée",
+        "description": "Déterminer si Zephyrus doit considérer l'instance de la base de données comme un Singleton. Permet d'accélérer l'instanciation qui est automatiquement réutilisé d'un courtier à l'autre. Devrait être activé pour la plupart des projets à configuration standard."
+      },
+      "convert": {
+        "title": "Conversion de type",
+        "description": "Activer la conversion automatique des types lors des résultats reçus de la base de données en type natif PHP. Par exemple, une colonne de type <code>INT</code> depuis la base de données, sera convertie automatiquement en entier PHP (et non en chaîne de caractères comme par défaut). Très utile lors de l'envoie d'une réponse en JSON pour éviter du transtypage complémentaire."
+      }
+    },
+    "security": {
+      "title": "Sécurité",
+      "password_pepper": {
+        "title": "Poivre de mot de passe",
+        "description": "Générer un poivre cryptographiquement aléatoire pour le hachage des mots de passe. Cette fonctionnalité permet d'automatiquement inclure le poivre lors du hachage des mots de passe avec la méthode <code>Cryptography::hashPassword()</code>. À noter que le sel est automatiquement inclus également. Le poivre devrait être unique par projet et par serveur."
+      },
+      "ids": {
+        "title": "Détection d'intrusion",
+        "description": "Activer le système de détection d'intrusion (IDS) pour toutes les requêtes. Ce module permet d'attraper des tentatives d'attaques par injection SQL, XSS ou autres directement depuis les paramètres de la requête et d'agir sur ces tentatives avant même d'atteindre l'exécution d'une route. Les actions suite à une détection, doivent être programmées selon les besoins de l'application (redirection, log, courriel, bloquer, etc.)."
+      },
+      "csrf": {
+        "title": "Mitigation CSRF",
+        "description": "Activer la gestion automatique des jetons CSRF (Cross Site Request Forgery). Ce mécanisme permet d'empêcher l'exploitation d'un lien de l'application sans avoir un jeton généré expressément pour une requête ce qui rend impossible la forge de requête malicieuse hors du site. Activer ce paramètre fait en sorte que Zephyrus va automatiquement intégrer le jeton CSRF généré dans les formulaires avant d'envoyer la réponse au client et s'assurer de sa validité une fois un formulaire soumis au server."
+      },
+      "session_encrypt": {
+        "title": "Chiffrement de la session",
+        "description": "Activer le chiffrement de la session. Cette mesure de sécurité peut être intense pour la plupart des systèmes. Ce paramètre permet de chiffrer le fichier qui contient les données de la session sur le serveur. La clé de déchiffrement est automatiquement conservée dans les fichiers témoins du client. Ce qui fait donc qu'uniquement le client légitime peut dévérouiller ses données de session. Utile pour protégrer les données de session sensibles dans l'éventualité que le serveur soit compromis."
+      },
+      "session_hash": {
+        "title": "Liaison cryptographique de la session",
+        "description": "Activer une liaison cryptographique par hachage entre la session de l'utilisateur, son adresse IP et l'identifiant de son logiciel client (<i>user agent</i>). Ce mécanisme fait en sorte qu'il n'est pas possible d'utiliser une même session sur deux navigateurs différents ou depuis une adresse IP différente même en ayant l'identifiant de session en main. Depuis les configurations <code>config.ini</code>, il est possible de modifier le paramétrage détaillé de ce mécanisme."
+      },
+      "session_refresh": {
+        "title": "Rafraîchissement automatique de la session",
+        "description": "Activer un mécanisme permet de forcer un rafraîchissement automatique de l'identifiant de session selon une probabilité à chaque requête du client (par défaut 0.4). Fait en sorte de protéger l'identifiant de session d'un détournement pour un certain nombres de requêtes. Depuis les configurations <code>config.ini</code>, il est possible de modifier le paramétrage de ce mécanisme en indiquant un délais temporelle, un nombre de requêtes fixes ou une probabilité."
+      },
+      "encryption_algorithm": {
+        "title": "Algorithme de chiffrement",
+        "description": "Entrer l'algorithme à utiliser depuis les méthodes de chiffrement de la classe <code>Cryptography</code>. L'algorithme doit être compatible avec la <a href='https://www.php.net/manual/fr/function.openssl-get-cipher-methods.php' target='_blank'>bibliothèque openSSL</a>."
+      }
+    },
+    "frontend": {
+      "title": "Bibliothèques",
+      "framework": {
+        "title": "Framework de premier plan",
+        "description": "Sélectionner un framework de premier plan à intégrer dans le projet. L'assistant de configuration va intégrer localement dans les répertoires <code>/public/stylesheets/vendors</code> et <code>/public/javascripts/vendor</code> les dépendances du framework sélectionné. Pour le moment, les frameworks disponibles sont : <a href='https://getbootstrap.com' target='_blank'>Bootstrap v5.1.3</a>, <a href='https://materializecss.com' target='_blank'>Materialize v1.0.0</a> et <a href='https://bulma.io' target='_blank'>Bulma v0.9.3</a>. Pour utilisé la cache des clients, il est recommandé d'utiliser le CDN."
+      },
+      "jquery": {
+        "title": "JQuery",
+        "description": "Intégration dans le projet de la <a href='https://jquery.com' target='_blank'>bibliothèque JQuery v3.6.0</a> localement dans le répertoire <code>/public/javascripts/vendors</code>. Une bibliothèque qui facilite toutes les manipulations JavaScript. Pour utilisé la cache des clients, il est recommandé d'utiliser le CDN."
+      },
+      "fontawesome": {
+        "title": "Font Awesome",
+        "description": "Inclusion de l'ensemble gratuit des icônes <a href='https://fontawesome.com' target='_blank'>Font Awesome v5.13.0</a> localement dans le répertoire <code>/public/stylesheets/vendors</code>. Pour utilisé la cache des clients, il est recommandé d'utiliser le CDN."
+      },
+      "lineicons": {
+        "title": "Line Icons",
+        "description": "Inclusion de l'ensemble gratuit des icônes <a href='https://lineicons.com' target='_blank'>Line Icons v2.0</a> localement dans le répertoire <code>/public/stylesheets/vendors</code>. Pour utilisé la cache des clients, il est recommandé d'utiliser le CDN."
+      },
+      "moments": {
+        "title": "Moment JS",
+        "description": "Inclusion de la bibliothèque JavaScript <a href='https://momentjs.com' target='_blank'>Moment JS v2.26.0</a> localement dans le répertoire <code>/public/javascripts/vendors</code> (version avec toutes les langues). Cette bibliothèque permet une manipulation simple des dates et du temps en JavaScript (validation, affichage, transformation, etc.). Pour utilisé la cache des clients, il est recommandé d'utiliser le CDN."
+      },
+      "numeral": {
+        "title": "Numeral JS",
+        "description": "Inclusion de la bibliothèque JavaScript <a href='http://numeraljs.com' target='_blank'>Numeral JS v2.0.6</a> localement dans le répertoire <code>/public/javascripts/vendors</code> (version avec toutes les langues). Une bibliothèque incontournable permettant un formattage et une manipulation simple des nombres. Pour utilisé la cache des clients, il est recommandé d'utiliser le CDN."
+      }
+    },
+    "others": {
+      "title": "Intégrations",
+      "git": {
+        "title": "Initialisation du répertoire avec Git",
+        "description": "Au besoin, saisir le lien du <i>remote repository</i> pour initialiser le projet avec <a href='https://git-scm.com' target='_blank'>Git</a> (laissez vide pour ne pas utiliser). Nécessite le programme git intstallé sur la machine exécutant Zephyrus, l'assistant de configuration lancera la commande <code>git init</code> et <code>git remote add origin &lt;url&gt;</code>."
+      },
+      "codeclimate": {
+        "title": "Configuration pour Code Climate",
+        "description": "Création d'un fichier de configurations <code>/.codeclimate.yml</code> pour l'<a href='https://codeclimate.com' target='_blank'>analyseur de code PHP, JavaScript et CSS de Code Climate</a> avec les paramètres par défaut pour Zephyrus. Ce service est gratuit pour les projets sur un répertoire public et permet de maintenir une bonne qualité du code."
+      },
+      "travis": {
+        "title": "Configuration pour Travis CI",
+        "description": "Création d'un fichier de configurations <code>/.travis.yml</code> pour l'<a href='https://travis-ci.org' target='_blank'>intégrateur continue Travis CI</a> avec les paramètres nécessaires pour l'exécution d'un projet Zephyrus. Si vous désirez utiliser Code Climate, il est nécessaire de saisir la clé dans le fichier de configuration manuellement une fois l'installation terminée."
+      },
+      "styleci": {
+        "title": "Configuration pour Style CI",
+        "description": "Création d'un fichier de configurations <code>/.styleci.yml</code> pour l'<a href='https://styleci.io' target='_blank'>analyseur de code PHP Style CI</a> avec les paramètres par défaut utilisés pour le noyeau Zephyrus. Également gratuit pour les projets sur un répertoire public et permet de maintenir un code PHP extrêmement proche de la syntaxe standardisée."
+      },
+      "unittest": {
+        "title": "Configuration des tests unitaires",
+        "description": "Création d'un fichier de configurations <code>/phpunit.xml</code> et d'un répertoire de tests <code>/tests</code> contenant le nécessaire pour le démarrage d'un environnement de tests unitaires avec Zephyrus depuis le moteur <a href='https://phpunit.de' target='_blank'>PHP Unit</a>. Fortement recommandé et nécessaire pour l'utilisateur d'un intégrateur continue."
+      }
+    },
+    "confirmation": {
+      "title": "Confirmation"
+    },
+    "end": {
+      "title": "Terminé"
+    },
+    "success": "L'assistant de configuration a correctement préparé l'environnement du projet Zephyrus. Consultez le fichier <code>config.ini</code> pour ajuster les paramètres. Les scripts utilisés par l'assistant de configuration ont tous été nettoyés du projet.<br /><br />Merci d'utiliser Zephyrus pour la conception de votre projet!",
+    "understand": "L'assistant de configuration va configurer le fichier <b>config.ini</b> du projet selon les options sélectionnés, initialiser les répertoires <b>/public/stylesheets</b> et <b>/public/javascripts</b> avec les dépendances de premier plan sélectionnées et finalement effectuer un nettoyage pour supprimer les scripts de l'assistant de configuration."
+  },
+  "strings": {
+    "yes": "Oui",
+    "no": "Non",
+    "continue_step": "Continuer",
+    "cancel": "Annuler",
+    "understand": "Je comprends"
+  }
+}

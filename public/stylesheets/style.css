@@ -1,0 +1,336 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import "vendor/LineIcons.min.css";
+@import "vendor/bootstrap.min.css";
+
+:root {
+    --accent: #B24592;
+    --dark: #343a40;
+    --background: #fff;
+}
+
+/*********************************************************************/
+/* BODY STRUCTURE                                                    */
+/*********************************************************************/
+html, body {
+    height: 100%
+}
+
+html {
+    font-size: 100%;
+}
+
+body {
+    font-size: 1rem;
+    font-weight: 300;
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: #fff;
+}
+
+code {
+    color: var(--accent);
+    background: #f5f5f5;
+    border-radius: 4px;
+    padding: 3px;
+}
+
+/*********************************************************************/
+/* HOME SECTION                                                      */
+/*********************************************************************/
+/* region home */
+section.home {
+    background: url("images/background.jpg") no-repeat center center;
+    background-size: cover;
+    min-height: 1200px;
+    height: 100vh;
+    position: relative;
+    color: #fff;
+}
+
+section.home .svg {
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+    overflow: hidden;
+}
+
+section.home .svg > svg {
+    fill: #fff;
+    width: 101%;
+}
+
+section.home > div:first-of-type {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: #B24592;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #F15F79, #B24592);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #F15F79, #B24592); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    opacity: 0.8;
+}
+
+section.home > div:first-of-type:after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: block;
+    background: url("images/dotgrid.png") repeat;
+    opacity: 0.6;
+}
+
+section.home > div:nth-of-type(2) {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+section.home .logo img {
+    width: 250px;
+}
+
+section.home .version {
+    font-weight: 400;
+    font-size: 2.4rem;
+    padding-top: 60px;
+    text-align: right;
+}
+
+section.home .version img {
+    position: relative;
+    top: -4px;
+    width: 60px;
+    padding-left: 16px;
+}
+
+section.home .welcome {
+    text-align: center;
+    padding-top: 180px;
+    color: #e3e3e3;
+}
+
+section.home .welcome img {
+    width: 120px;
+    padding-right: 32px;
+}
+
+section.home .welcome h1 {
+    padding-top: 16px;
+    font-weight: 300;
+    font-size: 7rem;
+    font-family: 'VT323', monospace;
+    padding-bottom: 30px;
+    margin-bottom: 50px;
+}
+
+section.home .welcome p {
+    font-size: 1.2rem;
+}
+
+section.home .welcome a {
+    color: #3b3b3b;
+}
+
+section.home .welcome b {
+    font-weight: 700;
+}
+
+section.home .welcome .btn {
+    letter-spacing: 1px;
+}
+
+section.home .welcome .btn i {
+    font-size: 1.5rem;
+    top: 2px;
+    position: relative;
+}
+/* endregion */
+
+/*********************************************************************/
+/* FEATURE SECTION                                                   */
+/*********************************************************************/
+/* region Features */
+section.features > .container > h1 {
+    margin-top: 60px;
+    text-align: center;
+}
+
+section.features > .container > h1+p {
+    margin-bottom: 80px;
+    color: #808080;
+    text-align: center;
+}
+
+section.features .col-lg-4 {
+    margin-bottom: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+section.features .col-lg-4 span {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    text-align: center;
+    color: #B24592;
+    font-size: 3rem;
+    border-radius: 100%;
+    border: 1px solid #dedede;
+    margin-bottom: 16px;
+    padding-top: 4px;
+}
+/* endregion */
+
+/*********************************************************************/
+/* COUNTERS SECTION                                                  */
+/*********************************************************************/
+/* region counters */
+section.counters {
+    background: #f5f5f5;
+    padding-top: 60px;
+    margin-top: 100px;
+}
+
+section.counters .col-lg-3 span > i {
+    color: #B24592;
+    font-size: 3rem;
+}
+
+section.counters .col-lg-3 > div {
+    font-size: 3.5rem;
+    font-weight: 700;
+}
+
+.svg-counter {
+    overflow: hidden;
+    height: 260px;
+}
+/* endregion */
+
+/*********************************************************************/
+/* EXAMPLES SECTION                                                  */
+/*********************************************************************/
+/* region examples */
+section.examples > .container > h1 {
+    text-align: center;
+}
+
+section.examples > .container > h1+p {
+    margin-bottom: 80px;
+    color: #808080;
+    text-align: center;
+}
+
+section.examples > .container > h5 {
+    margin-top: 120px;
+}
+/* endregion */
+
+/*********************************************************************/
+/* FOOTER                                                            */
+/*********************************************************************/
+/* region footer */
+.svg-footer {
+    overflow: hidden;
+    height: 260px;
+    background: #B24592;
+    background: -webkit-linear-gradient(to left, #F15F79, #B24592);
+    background: linear-gradient(to left, #F15F79, #B24592);
+    margin-top: 100px;
+}
+
+.svg-footer > svg {
+    position: relative;
+    top: -200px;
+}
+
+.svg-footer > img {
+    position: absolute;
+    z-index: 100;
+    width: 300px;
+    left: calc(50% - 150px);
+}
+
+footer {
+    position: relative;
+    color: #fff;
+    background: #B24592;
+    background: -webkit-linear-gradient(to left, #F15F79, #B24592);
+    background: linear-gradient(to left, #F15F79, #B24592);
+    padding-top: 32px;
+    padding-bottom: 32px;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: #3b3b3b;
+}
+
+footer a:hover {
+    color: #3b3b3b;
+}
+
+footer .socials > a {
+    font-size: 2.5rem;
+    color: #fff;
+    text-decoration: none;
+    margin-left: 16px;
+}
+
+@media screen and (max-width: 2200px) {
+    footer {
+        top: -50px;
+    }
+}
+
+@media screen and (max-width: 1900px) {
+    footer {
+        top: -100px;
+    }
+}
+
+@media screen and (max-width: 1600px) {
+    footer {
+        top: -150px;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    footer {
+        top: -200px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    footer {
+        top: -250px;
+    }
+
+    section.home .welcome h1 {
+        font-size: 4rem;
+    }
+
+    section.home .welcome p {
+        font-size: 1rem;
+    }
+
+    section.home .welcome img {
+        width: 80px;
+        margin: 0 auto;
+        padding-right: 0;
+        display: block;
+    }
+
+    section.counters .col-lg-3 span > i {
+        color: #B24592;
+        font-size: 2rem;
+    }
+
+    section.counters .col-lg-3 > div {
+        font-size: 2.5rem;
+        font-weight: 700;
+    }
+}
+/* endregion */

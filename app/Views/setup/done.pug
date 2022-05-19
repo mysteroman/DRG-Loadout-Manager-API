@@ -1,0 +1,22 @@
+extends ../sample-layout
+
+block content
+  br
+  br
+  br
+  br
+  .text-center.success
+    .circle-loader: .checkmark.draw
+    p!=localize("setup.success")
+    br
+    a.btn.btn-lg.btn-success(href="/")=localize("setup.end.title")
+
+  script(nonce=nonce()).
+      document.addEventListener('DOMContentLoaded', () => {
+          setTimeout(function () {
+              let elementToToggle = document.querySelector('.circle-loader');
+              elementToToggle.classList.toggle('load-complete');
+              elementToToggle = document.querySelector('.checkmark');
+              elementToToggle.style.display = "block";
+          }, 1500);
+      });

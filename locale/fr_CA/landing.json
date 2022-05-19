@@ -1,0 +1,53 @@
+{
+  "messages": {
+    "greetings": {
+      "hello_world": "\"Bonjour le monde\"",
+      "welcome": "Bienvenu dans le Framework Zephyrus! Ce framework est fondé sur un modèle pédagogique en s'orientant sur une structure MVC <b>simple</b>, une approche de programmation <b>flexible</b> laissant place à une extensibilité pour tous types de projet, une forte considération pour la sécurité applicative et une <b>liberté</b> de développement. Le tout offert depuis un noyeau orienté-objet <b>élégant</b> favorisant l'écriture d'un code de qualité <b>propre</b> et <b>maintenable</b>. Développé avec une philosophie de maintenir un <b>plaisir</b> à programmer en n'étant pas rigoureusement strict sur une utilisation figée où tout doit passer par une configuration et y être limité. Zephyrus s'insère à mi-chemin entre les plus petits frameworks et les monstres pour ainsi répondre aux besoins de la plupart des projets.",
+      "thanks": "Un immense merci pour avoir choisi Zephyrus pour le développement de votre application! Ce projet est maintenu par une équipe réduite et bénévole, n'hésitez pas à suivre les développements ou communiquer avec nous depuis le <a href='https://github.com/dadajuice/zephyrus' target='_blank'>GitHub du projet</a> pour toutes questions, commentaires, PRs ou rapport de bogues."
+    },
+
+    "features": {
+      "structure_title": "Structure",
+      "structure_description": "Une structure de projet simple et intuitive basée sur une architecture Model-View-Controller incluant le préprocesseur HTML Pug nativement avec le Zephyrus.",
+      "router_title": "Routage",
+      "router_description": "Routeur de requêtes très simple et flexible basé sur des contrôleurs incluant une intégration facile de middlewares dans le flux d'une requête et d'un contrôleur du projet.",
+      "security_title": "Sécurité",
+      "security_description": "Plusieurs mécanismes de sécurité intégrés tel que les entêtes CSP, les jetons CSRF, protection XSS, détection d'intrusion, mécanisme d'authorisation et plus encore!",
+      "database_title": "Base de données",
+      "database_description": "Philosophie d'accès aux données depuis des courtiers manuellement définis offrant un contôle complet sur les requêtes SQL et, par conséquent, une facilité de maintenance et d'optimisation.",
+      "validation_title": "Validations",
+      "validation_description": "Système de validation de formulaires élégant et facilement extensible offrant une multitude de règles nativement sur les nombres, les chaînes, les fichiers téléversés, les dates, etc.",
+      "localize_title": "Internationalisation",
+      "localize_description": "Moteur unique simple et optimisé pour la gestion des chaînes de caractères depuis une structure JSON, le tout facilement organisé pour offrir une internationalisation."
+    },
+
+    "stats": {
+      "unit_tests": "Couverture de tests unitaires",
+      "code_climate": "Maintenabilité Code Climate",
+      "download": "Téléchargements",
+      "stars": "Étoiles"
+    },
+
+    "examples": {
+      "controllers": {
+        "title": "Exemple 1 : Affichage d'une page HTML simple depuis une route",
+        "description": "Pour définir des routes pour le projet, il suffit de créer une classe contrôleur dans le répertoire <code>app/Controllers</code> du projet. La méthode <code>initializeRoutes()</code> doit être implémentée pour y définir l'ensemble des routes du contrôleur. Il est possible de définir des routes pour les méthodes http suivante : GET (<code>&#36;this-&gtget()</code>), POST (<code>&#36;this-&gtpost()</code>), PUT (<code>&#36;this-&gtput()</code>), PATCH (<code>&#36;this-&gtpatch()</code>) et DELETE (<code>&#36;this-&gtdelete()</code>). Le premier argument représente l'URL de la route (qui peut inclure des paramètres comme par exemple {id}) et le deuxième argument est le nom de la méthode à lancer au sein du contrôleur lorsque la route doit s'exécuter.",
+        "description2": "Ces méthodes d'action déclarées dans le contrôleur doivent obligatoirement retourner un objet de type <code>Response</code>. Plusieurs méthodes natives sont disponibles au sein des contrôleurs pour gérer des types de réponse commune tels que du HTML (<code>return &#36;this-&gthtml()</code></code>), JSON (<code>return &#36;this-&gtjson()</code>), XML (<code>return &#36;this-&gtxml()</code>), téléchargement (<code>return &#36;this-&gtdownload()</code>), streaming (<code>return &#36;this-&gtsse()</code>), redirection (<code>return &#36;this-&gtredirect()</code>), etc. La méthode <code>&#36;this-&gtrender</code> fait automatiquement référence au pré-processeur Pug pour retourner une réponse HTML. Le premier argument fait référence au fichier .pug depuis une localisation relative depuis <code>/app/Views</code>. Si aucun fichier .pug n'est trouvé, Zephyrus tentera de charger un fichier .php. Le deuxième argument est un tableau des variables à envoyer à des fins d'affichage et de traitement dans le fichier de la vue."
+      },
+      "validations": {
+        "title": "Exemple 2 : Validation d'une requête POST",
+        "description": "Les validations au sein d'un contrôleur sont très simple. Il suffit de créer un objet Form depuis <code>&#36;this-&gtbuildForm()</code> pour l'instancier automatiquement depuis toutes les données de la requête et d'appliquer les <code>validate</code> souhaité. L'objet <code>Rule</code> contient déjà une multitude de règles de validation communes accessible de façon statiques pouvant être utilisées et il est facile de définir une règle personnalisé avec un callback. Pour valider l'ensemble du formulaire une fois les validations définies, il suffit de lancer <code>verify()</code>. Si des erreurs existent, celles-ci se retrouveront dans <code>getErrorMessages()</code> et <code>getErrors()</code>."
+      },
+      "localize": {
+        "title": "Exemple 3 : Localisation des chaînes de caractères",
+        "description": "Pour démarrer le système de localisation, il suffit de créer un répertoire <code>/locale</code> à la racine du projet et à l'intérieur de créer au moins un répertoire dont le nom est le code de langue à utiliser, par exemple <code>fr_CA</code>. Dans ce répertoire, il suffit de créer des fichiers JSON avec la structure désirée pour conserver les chaînes de caractères.",
+        "description2": "Lorsque nous sommes dans une classe PHP, il est possible d'avoir accès aux messages depuis des références statiques et ainsi favoriser l'<i>auto complete</i> des IDE. Pour se faire, il suffit simplement de suivre la structure du JSON pour obtenir le message voulu.",
+        "description3": "Lorsque nous sommes dans un fichier PUG ou PHP de base, pour obtenir un message il est nécessaire d'utiliser la fonction <code>localize</code> qui prend en argument une chaîne contenant le chemin pour obtenir le message séparé par des points. Des arguments peuvent être inséré dans une chaîne avec la syntaxe de <code>sprint</code>."
+      }
+    },
+
+    "footer": {
+      "copyright": "<b>Zephyrus Framework</b> développé avec <i class='lni lni-heart-filled'></i> par David Tucker sous licence <a href='http://opensource.org/licenses/mit-license.php' target='_blank'>MIT</a>. Le contenu démonstratif de ce site Web est mis à disposition selon les termes de la licence <a href='https://creativecommons.org/licenses/by/4.0/' target='_blank'>CC BY 4.0</a>.<br /><br />Photo principale par eberhard grossgasteiger depuis de <a href='https://www.pexels.com' target='_blank'>Pexels</a>. Icônes créés par <a href='https://www.flaticon.com/authors/freepik' target='_blank'>Freepik</a> depuis <a href='https://www.flaticon.com/' target='_blank'>flaticon.com</a>"
+    }
+  }
+}
