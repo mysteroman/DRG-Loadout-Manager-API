@@ -16,7 +16,7 @@ class ExampleController extends Controller
     public function initializeRoutes()
     {
         // Home page
-        $this->get("/sample", "index");
+        $this->get("/", "index");
 
         // It is possible to define routes according to the desired representation accepted. The following example
         // allows a standard HTML rendering but also a JSON representation for the same route.
