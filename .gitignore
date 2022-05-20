@@ -1,6 +1,5 @@
 composer.phar
 .idea/
-/vendor/
 composer.lock
 /tests/coverage
 /logs/
