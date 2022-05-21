@@ -16,6 +16,7 @@ abstract class Broker extends DatabaseBroker
     public function __construct(?Database $database = null)
     {
         parent::__construct($database);
+        $this->query('SET search_path = loadout_manager');
         /*$this->applyConnectionVariables();*/
     }
 
