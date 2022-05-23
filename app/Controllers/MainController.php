@@ -30,15 +30,15 @@ class MainController extends Controller
 
 		// Data
 		$this->get("/dwarves", "getDwarves");
-		$this->get('/dwarf', 'getDwarf', ContentType::FORM);
+		$this->get('/dwarf', 'getDwarf');
         $this->get("/perks", "getPerks");
 		
 		// Loadouts
-		$this->get("/loadouts", "getLoadouts", ContentType::FORM);
-		$this->get("/loadout", "getLoadout", ContentType::FORM);
-		$this->post("/loadout", "createLoadout", ContentType::FORM);
-		// $this->patch("/loadout", "updateLoadout", ContentType::FORM);
-		// $this->delete("/loadout", "deleteLoadout", ContentType::FORM);
+		$this->get("/loadouts", "getLoadouts");
+		$this->get("/loadout", "getLoadout");
+		$this->post("/loadout", "createLoadout");
+		// $this->patch("/loadout", "updateLoadout");
+		// $this->delete("/loadout", "deleteLoadout");
     }
 
     public function signup(): \Zephyrus\Network\Response
