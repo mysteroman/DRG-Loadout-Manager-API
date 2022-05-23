@@ -180,7 +180,7 @@ class DataBroker extends Broker
 
     private function resolveModifier(int|\stdClass &$modifier): void
     {
-        $sql = 'select name, icon, description from modifier where id = ? and id_version = ?';
+        $sql = 'select id, name, icon, description from modifier where id = ? and id_version = ?';
         $modifier = $this->selectSingle($sql, [$modifier, $this->version]);
         $sql = 'select id_stat "stat", mul "operation", operand from stat_modifier where id_modifier = ? and id_version = ?';
         $stats = $this->select($sql, [$modifier->id, $this->version]);
