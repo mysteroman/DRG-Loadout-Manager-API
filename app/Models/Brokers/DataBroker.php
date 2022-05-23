@@ -6,15 +6,11 @@ use Zephyrus\Database\Core\Database;
 class DataBroker extends Broker
 {
     private int $version;
-    private array $modifierCallback;
-    private array $weaponCallback;
 
     public function __construct(?int $version = null)
     {
         parent::__construct();
         $this->version = $version ?? $this->findCurrentVersion()->id;
-        $this->modifierCallback = [$this, 'handleModifier'];
-        $this->weaponCallback = [$this, 'handleWeapon'];
     }
 
     public function findAllVersions(): array
@@ -109,13 +105,13 @@ class DataBroker extends Broker
     private function findPrimaryWeaponsByDwarf(int $id_dwarf): array
     {
         $sql = 'select i.id "id", i.name "name", i.icon "icon", w.id "order" from primary_weapon w join item i on i.id = w.id_item where i.id_dwarf = ?';
-        return $this->select($sql, [$id_dwarf], $this->weaponCallback);
+        return $this->select($sql, [$id_dwarf], [$this, 'handleWeapon']);
     }
 
     private function findSecondaryWeaponsByDwarf(int $id_dwarf): array
     {
         $sql = 'select i.id "id", i.name "name", i.icon "icon", w.id "order" from secondary_weapon w join item i on i.id = w.id_item where i.id_dwarf = ?';
-        return $this->select($sql, [$id_dwarf], $this->weaponCallback);
+        return $this->select($sql, [$id_dwarf], [$this, 'handleWeapon']);
     }
 
     private function findStatsByItem(int $item): array
@@ -134,7 +130,7 @@ class DataBroker extends Broker
     {
         $tiers = [];
         $sql = 'select tier, slot, id_modifier "modifier" from upgrade where id_item = ? and id_version = ?';
-        $upgrades = $this->select($sql, [$item, $this->version], $this->modifierCallback);
+        $upgrades = $this->select($sql, [$item, $this->version], [$this, 'handleModifier']);
         foreach ($upgrades as $upgrade)
         {
             $id_tier = $upgrade->tier - 1;
@@ -162,7 +158,7 @@ class DataBroker extends Broker
     {
         $sql = 'select id, id_modifier "modifier", type from overclock where id_item = ? and id_version = ?';
         $overclocks = [];
-        foreach ($this->select($sql, [$item, $this->version], $this->modifierCallback) as $overclock) {
+        foreach ($this->select($sql, [$item, $this->version], [$this, 'handleModifier']) as $overclock) {
             $overclocks[$overclock->id] = $overclock;
         }
         return $overclocks;
