@@ -118,14 +118,14 @@ class DataBroker extends Broker
         return $this->select($sql, [$id_dwarf], $this->weaponCallback);
     }
 
-    private function findStatsByItem(int $item): \stdClass
+    private function findStatsByItem(int $item): array
     {
         $sql = 'select s.id "id", s.name "name", s.value_format "value_format", i.base_value "base_value" from item_stat i join stat s on s.id = i.id_stat where i.id_item = ? and i.id_version = ?';
-        $stats = new \stdClass();
+        $stats = [];
         $result = $this->select($sql, [$item, $this->version]);
         foreach ($result as $itemStat)
         {
-            $stats->{$itemStat->id} = $itemStat;
+            $stats[$itemStat->id] = $itemStat;
         }
         return $stats;
     }
@@ -161,7 +161,11 @@ class DataBroker extends Broker
     private function findOverclocksByItem(int $item): array
     {
         $sql = 'select id, id_modifier "modifier", type from overclock where id_item = ? and id_version = ?';
-        return $this->select($sql, [$item, $this->version], $this->modifierCallback);
+        $overclocks = [];
+        foreach ($this->select($sql, [$item, $this->version], $this->modifierCallback) as $overclock) {
+            $overclocks[$overclock->id] = $overclock;
+        }
+        return $overclocks;
     }
 
     private function handleModifier(\stdClass $container): \stdClass

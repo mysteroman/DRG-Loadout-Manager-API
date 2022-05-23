@@ -18,10 +18,10 @@ class LoadoutBroker extends Broker
 
         // Sort
         $sql .= ' order by ';
-        if ($request->sort == 'asc_date') $sql .= 'l.edition_date asc';
+        if ($request->sort == 'asc_date') $sql .= 'l.publish_date asc';
         else if ($request->sort == 'name') $sql .= 'l.name desc';
         else if ($request->sort == 'asc_name') $sql .= 'l.name asc';
-        else $sql .= 'l.edition_date desc';
+        else $sql .= 'l.publish_date desc';
 
         // Page
         $offset = $request->page;
@@ -44,15 +44,16 @@ class LoadoutBroker extends Broker
         if (is_null($loadout)) return null;
         $broker = new DataBroker($loadout->version);
         $loadout->version = $broker->findVersionById($loadout->version);
-        $loadout->dwarf = $broker->findDwarfById($loadout->dwarf);
+        $loadout->dwarf = $broker->findDwarfById($loadout->dwarf, false);
+        $dwarf = $broker->findDwarfById($loadout->dwarf->id);
         $loadout->perks = $this->findPerks($id, $broker);
-        $loadout->grenade = $this->findAnyItemInSlot($id, $loadout->dwarf->grenades);
-        $loadout->primary = $this->findAnyItemInSlot($id, $loadout->dwarf->primaries);
-        $loadout->secondary = $this->findAnyItemInSlot($id, $loadout->dwarf->secondaries);
-        $loadout->pickaxe = $this->findAnyItemInSlot($id, [$loadout->dwarf->pickaxe]);
-        $loadout->armor = $this->findAnyItemInSlot($id, [$loadout->dwarf->armor]);
-        $loadout->mobility_tool = $this->findAnyItemInSlot($id, [$loadout->dwarf->mobility_tool]);
-        $loadout->support_tool = $this->findAnyItemInSlot($id, [$loadout->dwarf->support_tool]);
+        $loadout->grenade = $this->findAnyItemInSlot($id, $dwarf->grenades);
+        $loadout->primary = $this->findAnyItemInSlot($id, $dwarf->primaries);
+        $loadout->secondary = $this->findAnyItemInSlot($id, $dwarf->secondaries);
+        $loadout->pickaxe = $this->findAnyItemInSlot($id, [$dwarf->pickaxe]);
+        $loadout->armor = $this->findAnyItemInSlot($id, [$dwarf->armor]);
+        $loadout->mobility_tool = $this->findAnyItemInSlot($id, [$dwarf->mobility_tool]);
+        $loadout->support_tool = $this->findAnyItemInSlot($id, [$dwarf->support_tool]);
         return $loadout;
     }
 
@@ -66,7 +67,7 @@ class LoadoutBroker extends Broker
         $perks = new \stdClass();
         foreach ($result as $perk)
         {
-            $slot = $perk->slot > 3 ? 'a' : 'p';
+            $slot = $perk->slot > 3 ? 'A' : 'P';
             $slot .= $perk->slot > 3 ? $perk->slot - 3 : $perk->slot;
             $perks->{$slot} = $perk->perk;
         }
@@ -104,7 +105,9 @@ class LoadoutBroker extends Broker
         $result = $this->select($sql, [$id, $item->id]);
         foreach ($result as $upgrade)
         {
-            $upgrades[$upgrade->tier - 1] = $upgrade->slot - 1;
+            $value = $item->upgrades[$upgrade->tier - 1][$upgrade->slot - 1];
+            $value->slot = $upgrade->slot - 1;
+            $upgrades[$upgrade->tier - 1] = $value;
         }
         return $upgrades;
     }
@@ -114,7 +117,7 @@ class LoadoutBroker extends Broker
         $sql = 'select id_overclock "id" from loadout_overclock where id_loadout = ? and id_item = ?';
         $overclock = $this->selectSingle($sql, [$id, $item->id]);
         if (is_null($overclock)) return null;
-        return $overclock->id;
+        return $item->overclocks[$overclock->id];
     }
 
     public function addLoadout(int $user, \stdClass $loadout): bool
