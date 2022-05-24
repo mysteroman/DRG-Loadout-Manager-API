@@ -9,7 +9,7 @@ class LoadoutBroker extends Broker
 {
     public function findAllFromRequest(\stdClass $request): array
     {
-        $sql = 'select l.id "id", u.username "owner", l.id_dwarf "dwarf", l.id_version "version", l.name "name", l.description "description", l.creation_date "creation_date", l.edition_date "edition_date" from loadout l join "user" u on u.id = l.id_user';
+        $sql = 'select l.id "id", u.username "owner", l.id_dwarf "dwarf", l.id_version "version", l.name "name", l.description "description", l.publish_date "publish_date" from loadout l join "user" u on u.id = l.id_user';
         $params = [];
         // Joins
 
