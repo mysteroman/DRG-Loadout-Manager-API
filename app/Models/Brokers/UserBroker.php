@@ -13,9 +13,8 @@ class UserBroker extends Broker
             $this->query($sql, [$username, $email, $password]);
             return true;
         }
-        catch (\Exception $ex)
+        catch (\Exception)
         {
-            die($ex);
             return false;
         }
     }
