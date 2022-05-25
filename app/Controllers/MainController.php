@@ -20,8 +20,8 @@ class MainController extends Controller
     public function initializeRoutes()
     {
         // User
-		$this->post("/user", "signup", ContentType::FORM);
-		$this->get("/user", "login", ContentType::FORM);
+		$this->post("/user", "signup");
+		$this->get("/user", "login");
         // $this->post("/user/follow", "follow");
 		// $this->get("/user/follow", "getFollows");
 		
