@@ -22,6 +22,7 @@ class MainController extends Controller
         // User
 		$this->post("/user", "signup");
 		$this->get("/user", "login");
+		$this->get("/signup", "form");
         // $this->post("/user/follow", "follow");
 		// $this->get("/user/follow", "getFollows");
 		
@@ -39,6 +40,24 @@ class MainController extends Controller
 		$this->post("/loadout", "createLoadout");
 		// $this->patch("/loadout", "updateLoadout");
 		// $this->delete("/loadout", "deleteLoadout");
+    }
+
+    public function form(): \Zephyrus\Network\Response
+    {
+        return $this->html('<!doctype html>
+        <html lang="en_us">
+        <head>
+            <title>Sign Up</title>
+        </head>
+        <body>
+            <form action="/user" method="post">
+                <input type="text" name="username"/><br/>
+                <input type="email" name="email"/><br/>
+                <input type="password" name="password"/><br/>
+                <button>Submit</button>
+            </form>
+        </body>
+        </html>');
     }
 
     public function signup(): \Zephyrus\Network\Response
