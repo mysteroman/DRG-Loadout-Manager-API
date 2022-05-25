@@ -6,7 +6,7 @@ class UserBroker extends Broker
 {
     public function tryCreateUser(string $username, string $email, string $password): bool
     {
-        $password = Cryptography::hashPassword($password, 'sha256');
+        $password = Cryptography::hashPassword($password);
         $sql = 'insert into "user" (username, email, password) values (?, ?, ?)';
         try
         {
