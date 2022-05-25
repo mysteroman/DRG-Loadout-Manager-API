@@ -26,7 +26,7 @@ class UserBroker extends Broker
         if (is_null($user)) return null;
         if (!Cryptography::verifyHashedPassword($password, $user->password)) return null;
         unset($user->password);
-        $user->api_key = $this->getUserKey($user->id);
+        $user->key = $this->getUserKey($user->id);
         unset($user->id);
         return $user;
     }
